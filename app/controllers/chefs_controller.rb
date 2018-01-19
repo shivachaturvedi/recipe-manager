@@ -27,7 +27,7 @@ class ChefsController < ApplicationController
   
   def update
     if @chef.update(chef_params)
-      flash[:success] = "Your profile has been updated succesfully"
+      flash[:success] = "Profile has been updated succesfully"
       redirect_to chef_path(@chef)
     else
       render 'edit'
@@ -36,6 +36,12 @@ class ChefsController < ApplicationController
   
   def show
     @recipes = @chef.recipes.paginate(page: params[:page], per_page: 3)
+  end
+  
+  def destroy
+    Chef.find(params[:id]).destroy
+    flash[:success] = "Chef Deleted"
+    redirect_to root_path
   end
   
   private
@@ -49,7 +55,7 @@ class ChefsController < ApplicationController
     end
     
     def require_same_user
-      if current_user != @chef
+      if current_user != @chef and !current_user.admin?
         flash[:danger] = "You can only edit your own profile"
         redirect_to root_path
       end

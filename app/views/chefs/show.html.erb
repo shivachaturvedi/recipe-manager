@@ -1,5 +1,11 @@
 <%= render 'shared/page_title', title: "Chef: " + @chef.chefname %>
 
+    <% if logged_in? and current_user.admin? %>
+      <%= link_to "Delete this Chef", @chef, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger pull-right"%> &nbsp;
+      <%= link_to "Edit Profile", edit_chef_path(@chef), class: "btn btn-primary pull-right" %>
+      
+    <% end %> 
+
 <div class="row">
   <div class="col-md-4 col-md-offset-4 center">
     <%= gravatar_for @chef, size: 200 %>

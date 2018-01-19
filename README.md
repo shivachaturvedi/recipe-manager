@@ -1,1 +1,1 @@
-A ruby on rails application to manage recipes and chefs
+A ruby on rails application to manage recipes and chefsgit 

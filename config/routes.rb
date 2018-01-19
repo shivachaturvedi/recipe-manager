@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :chefs, except: [:new, :destroy]
+  resources :chefs, except: [:new]
+  resources :users
   
   get '/register', to: 'chefs#new'
   
@@ -20,6 +21,5 @@ Rails.application.routes.draw do
   
   resources :styles, only: [:new, :create, :show]
   resources :ingredients, only: [:new, :create, :show]
-  
 
 end
