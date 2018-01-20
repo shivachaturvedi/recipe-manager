@@ -13,8 +13,10 @@ class ChefsController < ApplicationController
   def create
     @chef = Chef.new(chef_params)
     if @chef.save
-      flash[:success] = "Your account has been created succesfully"
-      session[:chef_id] = @chef.id
+      flash[:success] = "Account has been created succesfully"
+      if logged_in? and !current_user.admin?
+        session[:chef_id] = @chef.id
+      end
       redirect_to recipes_path
     else
       render 'new'
@@ -41,6 +43,7 @@ class ChefsController < ApplicationController
   def destroy
     Chef.find(params[:id]).destroy
     flash[:success] = "Chef Deleted"
+    Recipe.destroy_all(chef_id: params[:id])
     redirect_to root_path
   end
   

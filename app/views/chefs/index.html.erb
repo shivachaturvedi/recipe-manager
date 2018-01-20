@@ -1,5 +1,10 @@
 <%= render 'shared/page_title', title: "All Chefs" %>
 
+<% if logged_in? and current_user.admin? %>
+  <%= link_to "Create new User", register_path, class: "btn btn-lg btn-success pull-right" %>
+  <br/>
+<% end %> 
+
 <ul class="nav nav-tabs">
   <li>
     <%= link_to "Recipes", recipes_path %>
