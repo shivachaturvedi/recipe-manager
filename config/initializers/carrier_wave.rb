@@ -1,7 +1,7 @@
 if Rails.env.production?
   CarrierWave.configure do |config|
   config.storage    = :aws
-  config.aws_bucket = ENV.fetch('S3_BUCKET_NAME')
+  config.aws_bucket = ENV.fetch('S3_BUCKET')
   config.aws_acl    = 'public-read'
 
   # Optionally define an asset host for configurations that are fronted by a
