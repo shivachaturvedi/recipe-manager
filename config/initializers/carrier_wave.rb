@@ -1,6 +1,6 @@
 if Rails.env.production?
   CarrierWave.configure do |config|
-  config.storage    = :aws
+  
   config.aws_bucket = ENV.fetch('S3_BUCKET')
   config.aws_acl    = 'public-read'
 
@@ -22,5 +22,6 @@ if Rails.env.production?
     secret_access_key: ENV.fetch('S3_SECRET_KEY'),
     region:            ENV.fetch('AWS_REGION') # Required
   }
+  config.storage    = :aws
 end
 end
