@@ -10,6 +10,18 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :chefs do
+    member do
+      get 'follow'
+    end
+  end
+  
+  resources :chefs do
+    member do
+      get 'unfollow'
+    end
+  end
+  
   resources :chefs, except: [:new]
   resources :users
   

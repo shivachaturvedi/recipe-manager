@@ -1,5 +1,5 @@
 class ChefsController < ApplicationController
-  before_action :set_chef, only: [:edit, :update, :show]
+  before_action :set_chef, only: [:edit, :update, :show, :follow]
   before_action :require_same_user, only: [:edit, :update]
 
   def index
@@ -44,7 +44,30 @@ class ChefsController < ApplicationController
     Chef.find(params[:id]).destroy
     flash[:success] = "Chef Deleted"
     Recipe.destroy_all(chef_id: params[:id])
+    Follower.destroy_all(follower_id[:id])
     redirect_to root_path
+  end
+  
+  def follow
+    follower = Follower.create(chef_id: params[:id], follower_id: current_user.id)
+      if follower.valid?
+        flash[:success] = "You are now following this chef"
+        redirect_to :back
+      else
+        flash[:danger] = "Something went wrong!"
+        redirect_to :back
+      end
+  end
+  
+  def unfollow
+    Follower.where(chef_id: params[:id], follower_id: current_user.id).destroy_all()
+      if Follower.exists?(chef_id:params[:id], follower_id: current_user.id)
+        flash[:danger] = "Something went wrong"
+        redirect_to :back
+      else
+        flash[:success] = "You have unfollowed this Chef"
+        redirect_to :back
+      end
   end
   
   private

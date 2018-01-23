@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217054340) do
+ActiveRecord::Schema.define(version: 20180123144516) do
 
   create_table "chefs", force: true do |t|
     t.string   "chefname"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20150217054340) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.boolean  "admin",           default: false
+  end
+
+  create_table "followers", force: true do |t|
+    t.integer "chef_id"
+    t.integer "follower_id"
   end
 
   create_table "ingredients", force: true do |t|
