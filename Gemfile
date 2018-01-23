@@ -17,6 +17,10 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bcrypt', '3.1.7'
 gem 'fog-aws'
 
+group :development, :test do
+    gem 'railroady'
+end
+
 gem 'spring',        group: :development
 
 group :development, :test do
