@@ -39,6 +39,7 @@ class ChefsController < ApplicationController
   def show
     @recipes = @chef.recipes.paginate(page: params[:page], per_page: 3)
     @following = Follower.where(follower_id: @chef.id)
+    
   end
   
   def destroy
